@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
+    <link rel="stylesheet" href="vendor/bootstrap/css/bootstrap.min.css">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+
+    <title>Hello, world!</title>
+  </head>
+  <body>
+    <!-- <nav class="navbar navbar-dark bg-primary"> -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light"> -->
+        <!-- Navbar content -->
+        <a class="navbar-brand" href="#">
+        <!-- <img src="common/imagens/sgm.png" width="30" height="40" border="0"> DAbM - Monte sua placa de Barretas</a> -->
+        <img src="common/imagens/brasaoDAbM.png"> Monte sua placa de Barretas</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="#"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://www.planalto.gov.br/ccivil_03/decreto/Antigos/D40556.htm">
+              <i class="fa fa-external-link"></i> 
+              DECRETO Nº 40.556
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="http://rumb.dabm.mb/rumb/documentos/docs/vi_t4_c4-3.doc">
+              <i class="fa fa-link"></i> CAP 4.3 - CONDECORAÇÕES E MEDALHAS</a>
+            </li>
+          </ul>
+          <!-- <span class="navbar-text">
+            Navbar text with an inline element
+          </span> -->
+        </div>
+       
+    </nav>
+    <div class="container">
+      <!-- Content here -->
+      <h1>Hello, world!</h1>
+
+      <img src="common/imagens/sgm.png" width="60" height="70" border="0">
+
+      <?php if (isset($name)): ?>
+        <h2>Hello <?=htmlspecialchars($name);?>!</h2>
+      <?php else: ?>
+        <p>Try <a href="http://www.slimframework.com">SlimFramework</a></p>
+      <?php endif;?>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="vendor/jquery/dist/jquery.min.js" ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+  </body>
+</html>
