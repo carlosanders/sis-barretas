@@ -1,7 +1,7 @@
 <?php
 return [
     'settings' => [
-        'displayErrorDetails' => true, // set to false in production
+        'displayErrorDetails' => ('true' === getenv('DEBUG_DETAIL')), // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
         'service_directories' => [
             'services' => APP_ROOT . '/configuration/services/',
