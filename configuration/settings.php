@@ -3,9 +3,11 @@ return [
     'settings' => [
         'displayErrorDetails' => true, // set to false in production
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
-        'service_config_dir' => APP_ROOT.'/configuration/services/',
-        'route_config_dir'      => APP_ROOT.'/configuration/routes/',
-        'middleware_config_dir' => APP_ROOT.'/configuration/middleware/',
+        'service_directories' => [
+            'services' => APP_ROOT . '/configuration/services/',
+            'middlewares' => APP_ROOT . '/configuration/middleware/',
+            'routes' => APP_ROOT . '/configuration/routes/',
+        ],
 
         // Renderer settings
         'renderer' => [
