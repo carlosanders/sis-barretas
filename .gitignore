@@ -1,0 +1,57 @@
+#
+# Project specific excludes
+#
+/wiki/anotacoes/
+/logs/*
+!/logs/README.md
+/configuration/environments/*.env
+/cache/
+
+# Dependency directories
+/vendor/
+node_modules/
+public/vendor/
+
+#
+# Default excludes
+#
+# Binaries
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+*.war
+*.ear
+*.sar
+*.class
+
+# IntelliJ project files
+*.iml
+*.iws
+*.ipr
+.idea/
+
+# eclipse project file
+.settings/
+.classpath
+.project
+
+# NetBeans specific
+#nbproject/
+#nbproject/private/
+/nbproject/*
+!nbproject/project.properties
+!nbproject/project.xml
+
+#general swap/backup files
+*.so
+*.log
+*.out
+*~
+*.swp
+*.DS_Store
+*.lock

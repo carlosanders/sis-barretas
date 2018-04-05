@@ -1,0 +1,20 @@
+{
+  "name": "sistema-barreta",
+  "version": "1.0.0",
+  "description": "Sistema Monte sua placa de Barretas - auxlia o usuário na montagem das condecorações outorgadas pelos governos e instituições militares em seus uniformes, obedecendo a ordem de precedência a luz do DECRETO nº 40.556, de 17 de Dezembro de 1956 e do capítulo 4.3 do RUMB - Codecorações e Medalhas.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "1T (T)",
+  "license": "ISC"
+}
