@@ -2,6 +2,8 @@
 return [
     'settings' => [
         'displayErrorDetails' => ('true' === getenv('DEBUG_DETAIL')), // set to false in production
+        'debug'               => ('true' === getenv('DEBUG_DETAIL')),
+        'whoops.editor'       => 'phpstorm',
         'addContentLengthHeader' => false, // Allow the web server to send the content-length header
         'service_directories' => [
             'services' => APP_ROOT . '/configuration/services/',
