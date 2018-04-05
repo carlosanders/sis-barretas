@@ -5,6 +5,7 @@
 /logs/*
 !/logs/README.md
 /configuration/environments/*.env
+/cache/
 
 # Dependency directories
 /vendor/
