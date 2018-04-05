@@ -5,6 +5,9 @@ use Slim\Http\Response;
 
 // Routes
 
+$app->get('/[{name}]', 'DefaultController:index');
+/*
+// substituido acima - Anders
 $app->get('/[{name}]', function (Request $request, Response $response, array $args) {
     // Sample log message
     $this->logger->info("Slim-Skeleton '/' route");
@@ -13,3 +16,4 @@ $app->get('/[{name}]', function (Request $request, Response $response, array $ar
     return $this->renderer->render($response, 'index1.phtml', $args);
     //return $response->write("Hello " . $args['name']);
 });
+*/
