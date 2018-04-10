@@ -1,10 +1,11 @@
-/* bootstrap 4.0 
+/* bootstrap 4.0
 @import "../../../node_modules/bootstrap/scss/bootstrap"; */
-/* font-awesome 
+/* font-awesome
 @import "../../../node_modules/font-awesome/scss/font-awesome"; */
 /* css da aplicacao */
 /* css da aplicacao */
 h1 {
-  color: blue; }
+  color: #000099;
+  text-align: center; }
 
 /*# sourceMappingURL=styles.css.map */
