@@ -16,6 +16,7 @@ return [
             //'template_path' => __DIR__ . '/../templates/',
             'template_path' => APP_ROOT . '/src/resources/templates/',
             'template_cache' => APP_ROOT . '/cache/',
+            'auto_reload'               => ('true' === getenv('CACHE_AUTO_RELOAD')),
         ],
 
         // Monolog settings

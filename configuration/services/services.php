@@ -5,30 +5,21 @@
 $container = $app->getContainer();
 
 // view renderer
-/*
-$container['renderer'] = function ($c) {
-$settings = $c->get('settings')['renderer'];
-return new Slim\Views\PhpRenderer($settings['template_path']);
-};
- */
 $container['view'] = function ($container) {
     $settings = $container->get('settings');
     $view = new \Slim\Views\Twig($settings['renderer']['template_path'], [
-        'cache' => $settings['renderer']['template_cache']
+        'cache' => $settings['renderer']['template_cache'],
+        'auto_reload' => $settings['renderer']['auto_reload']
     ]);
     $view->addExtension(new \Slim\Views\TwigExtension(
         $container->get('router'),
         $container->get('request')->getUri()
     ));
 
-    $loader = new Twig_Loader_Filesystem($settings['renderer']['template_path']);
+    //echo $settings['renderer']['cache'];
+    //para exibir as variaveis
+    //var_dump($view->getEnvironment());
 
-    /*
-    $view->addExtension(new Twig_Environment(
-        $loader,
-        array('debug' => true)
-    ));
-    */
     return $view;
 };
 
