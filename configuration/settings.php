@@ -14,7 +14,7 @@ return [
         // Renderer settings
         'renderer' => [
             //'template_path' => __DIR__ . '/../templates/',
-            'template_path' => APP_ROOT . '/templates/',
+            'template_path' => APP_ROOT . '/src/resources/templates/',
             'template_cache' => APP_ROOT . '/cache/',
         ],
 
