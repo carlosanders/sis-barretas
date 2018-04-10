@@ -11,6 +11,7 @@
 /vendor/
 node_modules/
 public/vendor/
+/.sass-cache/
 
 #
 # Default excludes
