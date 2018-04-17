@@ -31,3 +31,23 @@ $container['logger'] = function ($c) {
     $logger->pushHandler(new Monolog\Handler\StreamHandler($settings['path'], $settings['level']));
     return $logger;
 };
+
+// Service factory for the ORM
+$capsule = new Illuminate\Database\Capsule\Manager;
+$capsule->addConnection($container->get('settings')['db']);
+//$capsule->bootEloquent();
+$capsule->setAsGlobal();
+$capsule->bootEloquent();
+/*
+// Service factory for the ORM
+$container['db'] = function ($container) {
+    $settings = $container->get('settings')['db'];
+    $capsule = new \Illuminate\Database\Capsule\Manager;
+    $capsule->addConnection($settings);
+
+    $capsule->setAsGlobal();
+    $capsule->bootEloquent();
+
+    return $capsule;
+};
+*/
