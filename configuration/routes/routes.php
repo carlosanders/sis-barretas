@@ -10,7 +10,7 @@ $app->get('/throw', 'DefaultController:throwException');
 
 $app->group('/categorias/', function (){
     //$this->get('', MedalhaController::class . ':index');
-    $this->get('', 'CategoriaController:index')->setName('home');
+    $this->get('', 'CategoriaController:index')->setName('list_categoria');
 });
 
 $app->get('/', 'DefaultController:index');
