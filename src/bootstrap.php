@@ -3,6 +3,8 @@
 if (!defined('APP_ROOT')) {
     $spl = new SplFileInfo(__DIR__ . '/..');
     define('APP_ROOT', $spl->getRealPath());
+
+    //var_dump($spl->getRealPath());
 }
 
 $loader = require_once APP_ROOT . '/vendor/autoload.php';

@@ -1,4 +1,10 @@
-h1 {
-  color: blue; }
+/* bootstrap 4.0
+@import "../../../node_modules/bootstrap/scss/bootstrap"; */
+/* font-awesome
+@import "../../../node_modules/font-awesome/scss/font-awesome"; */
+/* css da aplicacao */
+/* css da aplicacao */
+h2 {
+  padding: 15px 0 15px 0; }
 
 /*# sourceMappingURL=styles.css.map */

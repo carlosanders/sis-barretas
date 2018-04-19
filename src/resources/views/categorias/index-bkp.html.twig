@@ -1,0 +1,41 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block title %} CRUD Medalhas {% endblock %}
+
+{% block content %}
+    <!-- importamos o template desejado -->
+    <div class="container">
+        <!-- Content here -->
+        <h1>CRUD Barretas</h1>
+
+
+
+        <img src="{{ base_url() }}/common/imagens/sgm.png" width="60" height="70" border="0">
+
+        {% if name %}
+            <h2>Hello
+                {{ name }}!</h2>
+        {% else %}
+            <p>Try
+                <a href="/SlimFramework">/SlimFramework</a>
+            </p>
+        {% endif %}
+
+        {{ base_url() }}
+
+
+        {{ path_for('home') }}
+
+        {{ path_for('home', { 'name': 'josh' }) }}
+
+        {% if is_current_path('home', { 'name': 'josh' }) %}class="active"{% endif %}>
+
+        <h1>User List</h1>
+        <ul>
+            <li><a href="{{ path_for('home', { 'name': 'josh' }) }}" {% if is_current_path('home', { 'name': 'josh' }) %}class="active"{% endif %}>Josh</a></li>
+            <li><a href="{{ path_for('home', { 'name': 'andrew' }) }}">Andrew</a></li>
+        </ul>
+
+    </div>
+
+{% endblock %}

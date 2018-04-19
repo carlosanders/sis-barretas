@@ -1,0 +1,74 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block title %} CRUD Medalhas {% endblock %}
+
+{% block content %}
+    <!-- importamos o template desejado -->
+    <div class="container">
+        <!-- Content here -->
+        <!--<div class="row">-->
+        <h2>
+            Painel de Administração
+            <small class="text-muted">{{ titulo }}</small>
+        </h2>
+        <p>
+            <a class="btn btn-primary btn-lg" href="#" role="button">
+                <i class="fa fa-plus-circle"></i>
+                Adicionar Categoria
+            </a>
+        </p>
+
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Precedência</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for categoria in categorias %}
+                <tr>
+                    <th scope="row">{{ categoria.id }}</th>
+                    <td>{{ categoria.nome }}</td>
+                    <td>{{ categoria.descricao }}</td>
+                    <td>{{ categoria.ordem }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">
+                        No users have been found.
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <!--</div>-->
+        <p>total de paginas: {{ categorias.lastPage() }}</p>
+        <p>pagina atual: {{ categorias.currentPage() }}</p>
+        <p>itens por página:  {{ categorias.perPage() }}</p>
+        <p>Proxima URL:  {{ categorias.nextPageUrl() }}</p>
+        <p>URL Anterior:  {{ categorias.previousPageUrl() }}</p>
+
+        {#{{ categorias.links() }}#}
+
+        {{ paginator.count() }}
+        ---
+        {#<br />#}
+        {#<img src="{{ base_url() }}/common/imagens/sgm.png" width="60" height="70" border="0">#}
+
+        {#{% if name %}#}
+        {#<h2>Hello#}
+        {#{{ name }}!</h2>#}
+        {#{% else %}#}
+        {#<p>Try#}
+        {#<a href="/SlimFramework">/SlimFramework</a>#}
+        {#</p>#}
+        {#{% endif %}#}
+
+        {#{{ base_url() }}#}
+
+    </div>
+
+{% endblock %}
