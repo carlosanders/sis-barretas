@@ -10,7 +10,6 @@ return [
             'middlewares' => APP_ROOT . '/configuration/middleware/',
             'routes' => APP_ROOT . '/configuration/routes/',
         ],
-
         //Eloquent
         'db' => [
             'driver' => getenv('DB_CONNECTION'),
@@ -37,5 +36,10 @@ return [
             'path' => isset($_ENV['docker']) ? 'php://stdout' : __DIR__ . '/../logs/app.log',
             'level' => \Monolog\Logger::DEBUG,
         ],
+    ],
+    'twig' => [
+        'title' => 'Anders',
+        'description' => 'anders',
+        'author' => 'anders'
     ],
 ];

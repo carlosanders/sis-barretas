@@ -8,9 +8,11 @@ use Slim\Http\Response;
 
 $app->get('/throw', 'DefaultController:throwException');
 
-$app->group('/categorias/', function (){
+$app->group('/categorias', function (){
     //$this->get('', MedalhaController::class . ':index');
-    $this->get('', 'CategoriaController:index')->setName('list_categoria');
+    $this->get('[/]', 'CategoriaController:index')->setName('categories.list');
+    $this->get('/create', 'CategoriaController:create')->setName('categories.create');
+    $this->post('/store', 'CategoriaController:store')->setName('categories.store');
 });
 
 $app->get('/', 'DefaultController:index');

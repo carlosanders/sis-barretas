@@ -12,13 +12,13 @@
             <small class="text-muted"> - Página: {{ categorias.currentPage() }}</small>
         </h2>
         <p class="text-right">
-            <a class="btn btn-primary btn-lg" href="#" role="button">
+            <a class="btn btn-primary btn-lg" href="{{ base_url() }}{{ path_for('categories.create') }}" role="button">
                 <i class="fa fa-plus-circle"></i>
                 Adicionar Categoria
             </a>
         </p>
 
-        <table class="table">
+        <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
@@ -29,7 +29,6 @@
             </thead>
             <tbody>
             {% for categoria in categorias %}
-                {#{% for categoria in paginator.items() %}#}
                 <tr>
                     <th scope="row">{{ categoria.id }}</th>
                     <td>{{ categoria.nome }}</td>
@@ -39,7 +38,7 @@
             {% else %}
                 <tr>
                     <td colspan="4">
-                        No users have been found.
+                        No have been found.
                     </td>
                 </tr>
             {% endfor %}
@@ -50,21 +49,21 @@
             <ul class="pagination">
                 <li class="page-item {{ (not categorias.previousPageUrl()) ? 'disabled' : '' }}">
                     <a class="page-link"
-                       href="{{ base_url() }}{{ path_for('list_categoria') }}{{ categorias.previousPageUrl() }}"
+                       href="{{ base_url() }}{{ path_for('categories.list') }}{{ categorias.previousPageUrl() }}"
                        tabindex="-1">
                         <i class="fa fa-step-backward"></i>
-                        Previous
+                        Anterior
                     </a>
                 </li>
-                {% for p in 1..3 %}
+                {% for p in 1..categorias.lastPage() %}
                     <li class="page-item {{ (loop.index == categorias.currentPage()) ? 'active': '' }}">
                         <a class="page-link"
-                           href="{{ base_url() }}{{ path_for('list_categoria') }}?page={{ loop.index }}">{{ loop.index }}</a>
+                           href="{{ base_url() }}{{ path_for('categories.list') }}?page={{ loop.index }}">{{ loop.index }}</a>
                     </li>
                 {% endfor %}
                 <li class="page-item {{ (not categorias.nextPageUrl()) ? 'disabled' : '' }}">
                     <a class="page-link"
-                       href="{{ base_url() }}{{ path_for('list_categoria') }}{{ categorias.nextPageUrl() }}">
+                       href="{{ base_url() }}{{ path_for('categories.list') }}{{ categorias.nextPageUrl() }}">
                         Próximo
                         <i class="fa fa-step-forward "></i>
                     </a>
@@ -79,7 +78,7 @@
         {#<p>URL Anterior:  {{ categorias.previousPageUrl() }}</p>#}
 
         {#{{ base_url() }}#}
-        {#{{ base_url() }}{{ path_for('list_categoria') }}{{ categorias.nextPageUrl() }}#}
+        {#{{ base_url() }}{{ path_for('categories.list') }}{{ categorias.nextPageUrl() }}#}
 
         {#{{ categorias.links() }}#}
 

@@ -15,6 +15,11 @@ $container['view'] = function ($container) {
         $container->get('router'),
         $container->get('request')->getUri()
     ));
+
+    $twig = $container->get('twig');
+    foreach ($twig as $name => $value) {
+        $view->getEnvironment()->addGlobal($name, $value);
+    }
 /*
     $environment = (new  \Dotenv\Loader(APP_ROOT.'/configuration/environments/environment.env'))
         ->parse()
