@@ -15,7 +15,14 @@ $container['view'] = function ($container) {
         $container->get('router'),
         $container->get('request')->getUri()
     ));
+/*
+    $environment = (new  \Dotenv\Loader(APP_ROOT.'/configuration/environments/environment.env'))
+        ->parse()
+        ->toArray(); // Throws LogicException if ->parse() is not called first
+    //var_dump($settings);
 
+    $view->getEnvironment()->addGlobal("app" , $environment);
+*/
     //echo $settings['renderer']['cache'];
     //para exibir as variaveis
     //var_dump($view->getEnvironment());

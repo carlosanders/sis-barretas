@@ -10,9 +10,9 @@ use Slim\Views\Twig;
 class DefaultController
 {
     /** @var LoggerInterface  */
-    private $logger;
+    protected $logger;
     /** @var Twig */
-    private $view;
+    protected $view;
 
     public function __construct(LoggerInterface $logger, Twig $view)
     {
@@ -32,6 +32,6 @@ class DefaultController
     {
         $this->logger->info("Slim-Skeleton '/throw' route");
 
-        throw new \Exception('testing errors 1.2.3..');
+       throw new \Exception('testing errors 1.2.3..');
     }
 }
