@@ -2,28 +2,16 @@
 
 namespace App\Controller;
 
+use App\Action;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Psr\Log\LoggerInterface;
-use Slim\Views\Twig;
 
-class DefaultController
+class DefaultController extends Action
 {
-    /** @var LoggerInterface  */
-    protected $logger;
-    /** @var Twig */
-    protected $view;
-
-    public function __construct(LoggerInterface $logger, Twig $view)
-    {
-        $this->logger = $logger;
-        $this->view = $view;
-    }
-
     public function index(RequestInterface $request, ResponseInterface $response, $args)
     {
         // Sample log message
-        $this->logger->info("Slim-Skeleton '/' route");
+        $this->logger->info(get_class($this)."'/'".__FUNCTION__);
 
         return $this->view->render($response, 'index.html.twig', $args);
     }
@@ -32,6 +20,6 @@ class DefaultController
     {
         $this->logger->info("Slim-Skeleton '/throw' route");
 
-       throw new \Exception('testing errors 1.2.3..');
+        throw new \Exception('testing errors 1.2.3..');
     }
 }

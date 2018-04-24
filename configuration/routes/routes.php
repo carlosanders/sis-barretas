@@ -6,16 +6,18 @@ use Slim\Http\Response;
 // Routes
 
 
-$app->get('/throw', 'DefaultController:throwException');
-
 $app->group('/categorias', function (){
     //$this->get('', MedalhaController::class . ':index');
-    $this->get('[/]', 'CategoriaController:index')->setName('categories.list');
-    $this->get('/create', 'CategoriaController:create')->setName('categories.create');
-    $this->post('/store', 'CategoriaController:store')->setName('categories.store');
+    $this->get('[/]', '\App\Controller\Action\CategoriaAction:index')->setName('categories.list');
+    $this->get('/create', '\App\Controller\Action\CategoriaAction:create')->setName('categories.create');
+    $this->post('/store', '\App\Controller\Action\CategoriaAction:store')->setName('categories.store');
 });
 
-$app->get('/', 'DefaultController:index');
+$app->get('/throw', '\App\Controller\DefaultController:throwException');
+
+$app->get('/', '\App\Controller\DefaultController:index');
+
+$app->get("/hello", \App\Controller\Action\HelloWorldAction::class);
 
 //$app->get('/[{name}]', 'DefaultController:index');
 /*

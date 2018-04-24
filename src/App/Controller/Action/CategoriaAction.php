@@ -2,24 +2,18 @@
 
 namespace App\Controller\Action;
 
-use App\Controller\DefaultController as Controller;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
+use App\Action;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
 use Illuminate\Database\Capsule\Manager as DB;
 use Illuminate\Pagination;
 use Illuminate\Pagination\Paginator;
-use Slim\Route;
-use Slim\Router;
 
 
-class CategoriaController extends Controller
+class CategoriaAction extends Action
 {
-    /** @var Router */
-    private $router;
-    /** @var \Slim\Views\TwigExtension */
-    private $rota;
 
-    public function index(RequestInterface $request, ResponseInterface $response, $args)
+    public function index(Request $request, Response $response, $args = [])
     {
         $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
 
@@ -46,32 +40,28 @@ class CategoriaController extends Controller
         return $this->view->render($response, 'categorias/index.html.twig', $args);
     }
 
-    public function create(RequestInterface $request, ResponseInterface $response, $args)
+    public function create(Request $request, Response $response, $args = [])
     {
         $args['titulo'] = 'Cadastrar Categoria';
         $args['pagina'] = 'categorias/add';
 
-        /** @var $route Route */
+        /** @var $route \Slim\Route */
         $route = $request->getAttribute('route');
         //var_dump($route->getName());
 
-        //var_dump( $this->view->getEnvironment()->getExtensions());
-       // $this->router =
         /** @var $te \Slim\Views\TwigExtension */
         //$te = $this->view->getEnvironment()->getExtension('Slim\Views\TwigExtension');
         //var_dump($te->getName());
         //var_dump($this->router);
 
-       // var_dump( $this->view->getEnvironment()->getExtension('Slim\Views\TwigExtension'));
-       // var_dump( $this->view->getEnvironment()->getExtension('Slim\Container'));
-
+        // var_dump( $this->view->getEnvironment()->getExtension('Slim\Views\TwigExtension'));
+        // var_dump( $this->view->getEnvironment()->getExtension('Slim\Container'));
         //var_dump( $this->view->getEnvironment()->getExtension('slim')->setBaseUrl($request->getUri()));
-
 
         return $this->view->render($response, 'categorias/create.html.twig', $args);
     }
 
-    public function store(RequestInterface $request, ResponseInterface $response, $args)
+    public function store(Request $request, Response $response, $args = [])
     {
         $data = $request->getParsedBody();
 
@@ -79,15 +69,9 @@ class CategoriaController extends Controller
         $descricao = trim(filter_var($data['descricao'], FILTER_SANITIZE_STRING));
         $precedencia = trim(filter_var($data['precedencia'], FILTER_SANITIZE_STRING));
 
-        //$request
-
-        /** @var $rotas \Slim\Views\TwigExtension */
-        $rotas = $this->view->getEnvironment()->getExtension('Slim\Views\TwigExtension');
-        $this->rota = $this->view->getEnvironment()->getExtension('Slim\Views\TwigExtension');
-
         if ($name == "" || $precedencia == "") {
             //$uri = $request->getUri()->withPath($this->router->pathFor('home'));
-            return $response->withRedirect($rotas->pathFor('categories.create'));
+            return $response->withRedirect($this->container->router->pathFor('categories.create'));
         }
 
         $dados['nome'] = $name;
@@ -101,7 +85,7 @@ class CategoriaController extends Controller
 
 
         return $response->withStatus(302)
-            ->withHeader('Location', $this->rota->pathFor('categories.list'));
-        //return $response->withRedirect($response->getBaseUrl() . '/new-url', 301);
+            ->withHeader('Location', $this->container->router->pathFor('categories.list'));
     }
+
 }
