@@ -52,6 +52,28 @@
     </div>
 </nav>
 
+{% block msg %}
+    <br>
+    <div class="container">
+        <!-- Aqui é onde usamos o identificador do addMessage() no nosso caso é o error -->
+        {#{% for item in messages.error %}#}
+        {#<div class="alert alert-danger">#}
+        {#{{ item }}#}
+        {#</div>#}
+        {#{% endfor %}#}
+
+        {% for msg in flash('error') %}
+            <div class="alert alert-danger alert-dismissible fade show">
+                <h5 class="alert-heading"><strong>Erros encontados!</strong></h5>
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
+
 {% block content %}{% endblock %}
 
 <!-- Optional JavaScript -->

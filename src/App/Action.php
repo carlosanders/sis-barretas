@@ -10,6 +10,7 @@ use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Log\LoggerInterface;
 use Slim\Views\Twig;
+use Slim\Flash\Messages;
 
 class Action
 {
@@ -19,12 +20,17 @@ class Action
     protected $view;
     /** @var \Slim\Container */
     protected $container;
+    /** @var Messages */
+    protected $flash;
 
     public function __construct(Container $container)
     {
         $this->container = $container;
         $this->logger = $container->get('logger');
         $this->view = $container->get('view');
+        $this->flash = $container->get('flash');
+       //$this->flash->addMessage('error', 'Você deve estar anders');
+       //var_dump($this->flash);
     }
 
     //abstract public function __invoke(Request $request, Response $response, $args = []);

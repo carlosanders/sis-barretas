@@ -3,6 +3,7 @@
 namespace App\Controller\Action;
 
 use App\Action;
+use Illuminate\Database\QueryException;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
 use Illuminate\Database\Capsule\Manager as DB;
@@ -45,6 +46,8 @@ class CategoriaAction extends Action
         $args['titulo'] = 'Cadastrar Categoria';
         $args['pagina'] = 'categorias/add';
 
+        //$args['name'] = 'teste nome';
+
         /** @var $route \Slim\Route */
         $route = $request->getAttribute('route');
         //var_dump($route->getName());
@@ -78,7 +81,21 @@ class CategoriaAction extends Action
         $dados['descricao'] = $descricao;
         $dados['ordem'] = $precedencia;
 
-        DB::table('categorias')->insert($dados);
+        $uri = $request->getUri();
+
+        //DB::table('categorias')->insert($dados);
+        try {
+            DB::table('categorias')->insert($dados);
+        } catch (QueryException $ex) {
+            $this->flash->addMessage('error', $ex->getMessage());
+
+            $url = $this->container
+                ->router->pathFor('categories.create', [], ['name' => $name]);
+
+           // return $response->withStatus(302)->withHeader('Location', $url);
+            return $response->withRedirect($url);
+            //return $response->withHeader('Location', $uri);
+        }
 
         $args['titulo'] = 'Cadastrar Categoria';
         $args['pagina'] = 'categorias/add';

@@ -7,6 +7,8 @@
     <div class="container">
         <h2>
             {{ titulo }}
+           valor: {{ data.name }}
+           valos: {{ name }}
         </h2>
         <div class="card card-default">
             <div class="card-header">Formulário de cadastro de categorias</div>
@@ -14,12 +16,14 @@
                 <form action="{{ base_url() }}{{ path_for('categories.store') }}" method="post">
                     <div class="form-group">
                         <label for="name">Nome da Categoria:</label>
-                        <input type="text" class="form-control" id="name" name="name"
+                        <input type="text" class="form-control" id="name"
+                               name="name" value="{{ data.name }}"
                                placeholder="Enter name category">
                     </div>
                     <div class="form-group">
                         <label for="descricao">Descrição da Categoria:</label>
-                        <input type="text" class="form-control" id="descricao" name="descricao" aria-describedby="emailHelp"
+                        <input type="text" class="form-control" id="descricao"
+                               name="descricao" aria-describedby="emailHelp"
                                placeholder="Enter with description">
                         <small id="emailHelp" class="form-text text-muted">Entre com uma breve resumo da categoria.
                         </small>
