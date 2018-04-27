@@ -36,6 +36,7 @@ class CategoriaAction extends Action
 
         $args['titulo'] = 'Lista de Categorias';
         $args['pagina'] = 'categorias/add';
+        //$args['pagina'] = 'categorias/add';
         $args['categorias'] = $cats;
 
         return $this->view->render($response, 'categorias/index.html.twig', $args);
@@ -88,11 +89,11 @@ class CategoriaAction extends Action
             DB::table('categorias')->insert($dados);
         } catch (QueryException $ex) {
             $this->flash->addMessage('error', $ex->getMessage());
+            $this->flash->addMessage('data', $data);
 
             $url = $this->container
-                ->router->pathFor('categories.create', [], ['name' => $name]);
-
-           // return $response->withStatus(302)->withHeader('Location', $url);
+                ->router->pathFor('categories.create');
+            // return $response->withStatus(302)->withHeader('Location', $url);
             return $response->withRedirect($url);
             //return $response->withHeader('Location', $uri);
         }
@@ -100,9 +101,96 @@ class CategoriaAction extends Action
         $args['titulo'] = 'Cadastrar Categoria';
         $args['pagina'] = 'categorias/add';
 
-
         return $response->withStatus(302)
             ->withHeader('Location', $this->container->router->pathFor('categories.list'));
+    }
+
+    public function edit(Request $request, Response $response)
+    {
+        $args['titulo'] = 'Editar Categoria';
+        $args['pagina'] = 'categorias/edit';
+
+        $id = $request->getAttribute('id');
+        //url para redirecionar
+        $url = $this->container->router->pathFor('categories.list');
+
+        try {
+            $categoria = DB::table('categorias')->where('id', $id)->first();
+
+            if (!$categoria) {
+                $this->flash->addMessage('error', "Categoria {$id} não encotrada.");
+
+                return $response->withStatus(302)->withHeader('Location', $url);
+            }
+
+            $args['categoria'] = $categoria;
+
+        } catch (QueryException $ex) {
+            $this->flash->addMessage('error', $ex->getMessage());
+            return $response->withStatus(302)->withHeader('Location', $url);
+        }
+
+        return $this->view->render($response, 'categorias/edit.html.twig', $args);
+    }
+
+    public function update(Request $request, Response $response)
+    {
+        $id = $request->getAttribute('id');
+        //url para redirecionar
+        $url = $this->container->router->pathFor('categories.list');
+
+        try {
+            $categoria = DB::table('categorias')->where('id', $id)->first();
+
+            if (!$categoria) {
+                $this->flash->addMessage('error', "Categoria {$id} não encotrada.");
+                return $response->withStatus(302)->withHeader('Location', $url);
+            }
+
+            $data = $request->getParsedBody();
+
+            $name = trim(filter_var($data['name'], FILTER_SANITIZE_STRING));
+            $descricao = trim(filter_var($data['descricao'], FILTER_SANITIZE_STRING));
+            $precedencia = trim(filter_var($data['precedencia'], FILTER_SANITIZE_STRING));
+
+            $dados['nome'] = $name;
+            $dados['descricao'] = $descricao;
+            $dados['ordem'] = $precedencia;
+
+            DB::table('categorias')->where('id', $id)->update($dados);
+
+            $this->flash->addMessage('success', "Categoria {$id} atualizada com sucesso.");
+            return $response->withStatus(302)->withHeader('Location', $url);
+
+        } catch (QueryException $ex) {
+            $this->flash->addMessage('error', $ex->getMessage());
+            return $response->withStatus(302)->withHeader('Location', $url);
+        }
+    }
+
+    public function delete(Request $request, Response $response)
+    {
+        $id = $request->getAttribute('id');
+        //url para redirecionar
+        $url = $this->container->router->pathFor('categories.list');
+
+        try {
+            $categoria = DB::table('categorias')->where('id', $id)->first();
+
+            if (!$categoria) {
+                $this->flash->addMessage('error', "Categoria {$id} não encotrada.");
+                return $response->withStatus(302)->withHeader('Location', $url);
+            }
+
+            DB::table('categorias')->where('id', $id)->delete();
+
+            $this->flash->addMessage('success', "Categoria {$id} excluída com sucesso.");
+            return $response->withStatus(302)->withHeader('Location', $url);
+
+        } catch (QueryException $ex) {
+            $this->flash->addMessage('error', $ex->getMessage());
+            return $response->withStatus(302)->withHeader('Location', $url);
+        }
     }
 
 }

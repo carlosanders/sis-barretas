@@ -25,6 +25,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">Precedência</th>
+                <th scope="col" style="width: 110px">Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -34,10 +35,18 @@
                     <td>{{ categoria.nome }}</td>
                     <td>{{ categoria.descricao }}</td>
                     <td>{{ categoria.ordem }}</td>
+                    <td>
+                        <a href="{{ base_url() }}{{ path_for('categories.edit', { 'id': categoria.id }) }}"
+                           class="btn btn-link"
+                           role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
+                        <a href="{{ base_url() }}{{ path_for('categories.trash', { 'id': categoria.id }) }}"
+                           class="btn btn-link"
+                           role="button" aria-pressed="true"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">
+                    <td colspan="5">
                         No have been found.
                     </td>
                 </tr>

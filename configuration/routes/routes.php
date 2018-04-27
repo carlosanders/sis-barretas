@@ -14,12 +14,12 @@ $app->get('/', '\App\Controller\DefaultController:index')
 //Grupo de Categorias
 $app->group('/categorias', function () {
 
-    $this->get('[/]', '\App\Controller\Action\CategoriaAction:index')
-        ->setName('categories.list');
-    $this->get('/create', '\App\Controller\Action\CategoriaAction:create')
-        ->setName('categories.create');
-    $this->post('/store', '\App\Controller\Action\CategoriaAction:store')
-        ->setName('categories.store');
+    $this->get('[/]', '\App\Controller\Action\CategoriaAction:index')->setName('categories.list');
+    $this->get('/create', '\App\Controller\Action\CategoriaAction:create')->setName('categories.create');
+    $this->post('/store', '\App\Controller\Action\CategoriaAction:store')->setName('categories.store');
+    $this->get('/{id:\d+}/edit', '\App\Controller\Action\CategoriaAction:edit')->setName('categories.edit');
+    $this->put('/{id:\d+}/update', '\App\Controller\Action\CategoriaAction:update')->setName('categories.update');
+    $this->delete('/{id:\d+}/delete', '\App\Controller\Action\CategoriaAction:delete')->setName('categories.trash');
 });
 
 
