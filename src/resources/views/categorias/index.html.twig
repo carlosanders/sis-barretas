@@ -12,7 +12,7 @@
             <small class="text-muted"> - Página: {{ categorias.currentPage() }}</small>
         </h2>
         <p class="text-right">
-            <a class="btn btn-primary btn-lg" href="{{ base_url() }}{{ path_for('categories.create') }}" role="button">
+            <a class="btn btn-success btn-lg" href="{{ base_url() }}{{ path_for('categories.create') }}" role="button">
                 <i class="fa fa-plus-circle"></i>
                 Adicionar Categoria
             </a>
@@ -25,7 +25,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">Precedência</th>
-                <th scope="col" style="width: 110px">Ações</th>
+                <th scope="col" style="width: 140px;">Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -36,12 +36,22 @@
                     <td>{{ categoria.descricao }}</td>
                     <td>{{ categoria.ordem }}</td>
                     <td>
-                        <a href="{{ base_url() }}{{ path_for('categories.edit', { 'id': categoria.id }) }}"
-                           class="btn btn-link"
-                           role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
-                        <a href="{{ base_url() }}{{ path_for('categories.trash', { 'id': categoria.id }) }}"
-                           class="btn btn-link"
-                           role="button" aria-pressed="true"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <div class="row">
+                            <div class="col-sm">
+                                <a href="{{ base_url() }}{{ path_for('categories.edit', { 'id': categoria.id }) }}"
+                                   class="btn btn-primary"
+                                   role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
+                            </div>
+                            <div class="col-sm">
+                                <form action="{{ base_url() }}{{ path_for('categories.trash', { 'id': categoria.id }) }}"
+                                      method="post">
+                                    <input type="hidden" name="_METHOD" value="DELETE"/>
+                                    <button class="btn btn-danger" aria-pressed="true" type="submit">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             {% else %}
