@@ -19,6 +19,20 @@
                 <a href="/SlimFramework">/SlimFramework</a>
             </p>
         {% endif %}
+
+        {#<!-- Aqui é onde usamos o identificador do addMessage() no nosso caso é o error -->#}
+        {#{% for item in messages.error %}#}
+            {#<div class="alert alert-danger">#}
+                {#{{item}}#}
+            {#</div>#}
+        {#{% endfor %}#}
+
+        {#{% for msg in flash('error') %}#}
+            {#<div class="alert alert-danger">#}
+                {#{{ msg }}#}
+            {#</div>#}
+        {#{% endfor %}#}
+
         <p>
             O que é Lorem Ipsum?
 

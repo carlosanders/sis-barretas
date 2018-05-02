@@ -8,23 +8,24 @@
         <!-- Content here -->
         <!--<div class="row">-->
         <h2>
-            Painel de Administração
-            <small class="text-muted">{{ titulo }}</small>
+            {{ titulo }}
+            <small class="text-muted"> - Página: {{ categorias.currentPage() }}</small>
         </h2>
-        <p>
-            <a class="btn btn-primary btn-lg" href="#" role="button">
+        <p class="text-right">
+            <a class="btn btn-success btn-lg" href="{{ base_url() }}{{ path_for('categories.create') }}" role="button">
                 <i class="fa fa-plus-circle"></i>
                 Adicionar Categoria
             </a>
         </p>
 
-        <table class="table">
+        <table class="table table-bordered">
             <thead class="thead-light">
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome</th>
                 <th scope="col">Descrição</th>
                 <th scope="col">Precedência</th>
+                <th scope="col" style="width: 140px;">Ações</th>
             </tr>
             </thead>
             <tbody>
@@ -34,27 +35,73 @@
                     <td>{{ categoria.nome }}</td>
                     <td>{{ categoria.descricao }}</td>
                     <td>{{ categoria.ordem }}</td>
+                    <td>
+                        <div class="row">
+                            <div class="col-sm">
+                                <a href="{{ base_url() }}{{ path_for('categories.edit', { 'id': categoria.id }) }}"
+                                   class="btn btn-primary"
+                                   role="button" aria-pressed="true"><i class="fa fa-edit"></i></a>
+                            </div>
+                            <div class="col-sm">
+                                <form action="{{ base_url() }}{{ path_for('categories.trash', { 'id': categoria.id }) }}"
+                                      method="post">
+                                    <input type="hidden" name="_METHOD" value="DELETE"/>
+                                    <button class="btn btn-danger" aria-pressed="true" type="submit">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </td>
                 </tr>
             {% else %}
                 <tr>
-                    <td colspan="4">
-                        No users have been found.
+                    <td colspan="5">
+                        No have been found.
                     </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item {{ (not categorias.previousPageUrl()) ? 'disabled' : '' }}">
+                    <a class="page-link"
+                       href="{{ base_url() }}{{ path_for('categories.list') }}{{ categorias.previousPageUrl() }}"
+                       tabindex="-1">
+                        <i class="fa fa-step-backward"></i>
+                        Anterior
+                    </a>
+                </li>
+                {% for p in 1..categorias.lastPage() %}
+                    <li class="page-item {{ (loop.index == categorias.currentPage()) ? 'active': '' }}">
+                        <a class="page-link"
+                           href="{{ base_url() }}{{ path_for('categories.list') }}?page={{ loop.index }}">{{ loop.index }}</a>
+                    </li>
+                {% endfor %}
+                <li class="page-item {{ (not categorias.nextPageUrl()) ? 'disabled' : '' }}">
+                    <a class="page-link"
+                       href="{{ base_url() }}{{ path_for('categories.list') }}{{ categorias.nextPageUrl() }}">
+                        Próximo
+                        <i class="fa fa-step-forward "></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
         <!--</div>-->
-        <p>total de paginas: {{ categorias.lastPage() }}</p>
-        <p>pagina atual: {{ categorias.currentPage() }}</p>
-        <p>itens por página:  {{ categorias.perPage() }}</p>
-        <p>Proxima URL:  {{ categorias.nextPageUrl() }}</p>
-        <p>URL Anterior:  {{ categorias.previousPageUrl() }}</p>
+        {#<p>total de paginas: {{ categorias.lastPage() }}</p>#}
+        {#<p>pagina atual: {{ categorias.currentPage() }}</p>#}
+        {#<p>itens por página:  {{ categorias.perPage() }}</p>#}
+        {#<p>Proxima URL:  {{ categorias.nextPageUrl() }}</p>#}
+        {#<p>URL Anterior:  {{ categorias.previousPageUrl() }}</p>#}
+
+        {#{{ base_url() }}#}
+        {#{{ base_url() }}{{ path_for('categories.list') }}{{ categorias.nextPageUrl() }}#}
 
         {#{{ categorias.links() }}#}
 
-        {{ paginator.count() }}
-        ---
+        {#Paginator: {{ paginator.count() }}#}
         {#<br />#}
         {#<img src="{{ base_url() }}/common/imagens/sgm.png" width="60" height="70" border="0">#}
 
