@@ -1,0 +1,97 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block title %} Principal {% endblock %}
+
+{% block content %}
+    <!-- importamos o template desejado -->
+    <div class="container">
+        <!-- Content here -->
+        <h1>Monte sua placa de Barretas</h1>
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                   aria-controls="pills-home" aria-selected="true">Barretas da Marinha</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                   aria-controls="pills-profile" aria-selected="false">Barretas fora da Força</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                {#{% for medalha in medalhas %}#}
+                                    {#{% for categoria in categorias %}#}
+                                        {#{% if medalha.categoria_id == categoria.id %}#}
+                                            {#<h5 class="card-title">{{ categoria.ordem }}. {{ categoria.nome }}</h5>#}
+                                        {#{% endif %}#}
+                                    {#{% endfor %}#}
+                                {#{% endfor %}#}
+
+
+                                {% for categoria in categorias %}
+                                    <h5 class="card-title">{{ categoria.nome }}</h5>
+
+                                    {#{% if categoria.id in medalhas %}#}
+                                        {#existe#}
+                                    {#{% endif %}#}
+
+                                    {% for medalha in medalhas %}
+                                        {% if medalha.categoria_id == categoria.id %}
+                                            {#<p class="card-text">#}
+                                                {{ medalha.nome_medalha }}
+                                            {#</p>#}
+                                        {% endif %}
+                                    {% endfor %}
+                                    <hr />
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        {#{{ dump(medalhas) }}#}
+                        {% if myValue1 in medalhas|keys %}
+                            aqui tem
+                        {% endif %}
+
+                        {#{% if myValue in ['apples', 'oranges'] %}#}
+                            {#Aqui, passou: {{ myValue }}#}
+                        {#{% endif %}#}
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <h5 class="card-header">Featured</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">
+                                    With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h5 class="card-header">Featured</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">
+                                    With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
