@@ -22,9 +22,9 @@ class DefaultController extends Action
     {
         // Sample log message
         //$this->logger->info(get_class($this)."'/'".__FUNCTION__);
-        $url = $this->container->router->pathFor('home');
+        //$url = $this->container->router->pathFor('home');
 
-        $args['categorias'] = DB::table('categorias')
+        $categorias = DB::table('categorias')
             ->orderByRaw('ordem ASC')
             ->get();
 
@@ -48,53 +48,78 @@ class DefaultController extends Action
 
         $resultsMedMB = DB::select(DB::raw($queryMedalhasMB));
 
-
-        $search = '3';
-        $romances = array_keys(
-            array_filter(
-                $resultsMedMB,
-                function ($value) use ($search) {
-                    //var_dump($value->categoria_id);
-                    if($value->categoria_id == $search){
-                        //var_dump($value);
-                        return $value;
-                        //$matches[] = $value;
-                    }
-                    /*
-                    if(stripos($value->categoria_id, $search) !== false) {
-                        $matches[] = $livro;
-                    }*/
-
-                    //return (strpos($value->categoria_id, $search) !== false);
-                    return null;
+        $queryGrupos = "SELECT * FROM barretas.grupos";
+        $rsGrupos= DB::select(DB::raw($queryGrupos));
+/*
+        //add array de grupos
+        foreach ($categorias as $categoria){
+            $categoria->grupos = [];
+            foreach ($rsGrupos as $grupo){
+                if($categoria->id == $grupo->categoria_id){
+                    $categoria->grupos[] = $grupo;
                 }
-            )
-        );
-        //var_dump($romances);
-        //var_dump($results);
-
-        //funciona parcialmente
-        $matches = array();
-        foreach($resultsMedMB as $medalha => $data) {
-            //var_dump($data);
-            //if(stripos($data->categoria_id, '3') !== false) {
-            if($data->categoria_id == $search){
-                $matches[] = $data;
             }
         }
-        //var_dump($matches);
+*/
+        /*foreach ($categorias as $categoria){
+           var_dump($categoria);
+        }*/
+/*
+        foreach ($categorias as $categoria){
+            foreach($categoria->grupos as $g) {
+                $g->medalhas = [];
+                foreach($resultsMedMB as $medalha) {
+                    if ($medalha->grupo_id == $g->id) {
+                        $g->medalhas[] = $medalha;
+                    }
+                }
+            }
+        }
+*/
+        /*foreach ($categorias as $categoria){
+            echo($categoria->nome);
+            foreach($categoria->grupos as $g) {
+                echo($g->nome);
+                foreach($resultsMedMB as $medalha) {
+                    var_dump($medalha);
+                }
+            }
+        }*/
 
+        //var_dump($categorias);
+
+
+
+        //monta o array
+        foreach ($categorias as $categoria){
+            $categoria->medalhas = [];
+            foreach($resultsMedMB as $medalha) {
+                if($medalha->categoria_id == $categoria->id){
+                    $categoria->medalhas[] = $medalha;
+                }
+            }
+        }
+
+        foreach ($categorias as $categoria) {
+            if(!empty($categoria->medalhas)) {
+                var_dump($categoria);
+            }
+        }
+/*
+
+        foreach ($categorias as $categoria){
+            if(empty($categoria->medalhas)) {
+                //var_dump($categoria);
+                continue;
+            }else{
+                echo "Categoria: " . $categoria->ordem . '-'.$categoria->nome;
+                var_dump($categoria->medalhas);
+            }
+        }
+*/
+        //var_dump($categorias->medalhas);
+        $args['categorias'] = $categorias;
         $args['medalhas'] = $resultsMedMB;
-        $args['myValue'] = "apples";
-        $args['myValue1'] = "7";
-
-        /*
-         DB::table('categorias')
-         ->select(DB::raw($query))
-         ->where('categorias.id', '<>', 1)
-         ->orderByRaw('ordem ASC')
-         ->get();
-     */
 
         return $this->view->render($response, 'home.html.twig', $args);
     }

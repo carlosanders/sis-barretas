@@ -24,45 +24,48 @@
                     <div class="col">
                         <div class="card">
                             <div class="card-body">
-                                {#{% for medalha in medalhas %}#}
-                                    {#{% for categoria in categorias %}#}
-                                        {#{% if medalha.categoria_id == categoria.id %}#}
-                                            {#<h5 class="card-title">{{ categoria.ordem }}. {{ categoria.nome }}</h5>#}
-                                        {#{% endif %}#}
-                                    {#{% endfor %}#}
-                                {#{% endfor %}#}
-
-
                                 {% for categoria in categorias %}
-                                    <h5 class="card-title">{{ categoria.nome }}</h5>
 
-                                    {#{% if categoria.id in medalhas %}#}
-                                        {#existe#}
-                                    {#{% endif %}#}
+                                    {% if not categoria.medalhas is empty %}
 
-                                    {% for medalha in medalhas %}
-                                        {% if medalha.categoria_id == categoria.id %}
-                                            {#<p class="card-text">#}
-                                                {{ medalha.nome_medalha }}
-                                            {#</p>#}
-                                        {% endif %}
-                                    {% endfor %}
-                                    <hr />
+                                        {% set id_grupo = 0 %}
+                                        {#{% set valor_id_grupo = 0 %}#}
+                                        <h5 class="card-title">{{ categoria.nome }}</h5>
+                                        {% for medalha in categoria.medalhas %}
+                                            id_grupo= {{ id_grupo }}
+                                            obj->grupo_id= {{ medalha.grupo_id }}
+                                            nome_medalha= {{ medalha.nome_medalha }}
+                                            <div class="card-text">
+                                                {#{% if id_grupo == 0 %}#}
+                                                {% if id_grupo == 0 %}
+                                                    {% set id_grupo = medalha.grupo_id %}
+                                                    <span class="text-primary">{{ medalha.nome_grupo }}</span>
+                                                {% endif %}
+                                                {#{{ dump(medalha.grupo_id, valor_id_grupo) }}#}
+                                                {% if medalha.grupo_id != id_grupo %}
+                                                    {% set id_grupo = 0 %}
+                                                    <span class="text-success">Grupo: {{ medalha.nome_grupo }}</span>
+                                                {#{% else %}#}
+                                                {% endif %}
+
+                                                {#{% if medalha.grupo_id == valor_id_grupo %}#}
+                                                    {#{% set valor_id_grupo = valor_id_grupo %}#}
+                                                    {#<div class="col">#}
+                                                        {#({{ medalha.nome_medalha }})#}
+                                                    {#</div>#}
+                                                {#{% endif %}#}
+
+                                                {#<div class="col">#}
+                                                    {#<span class="text-danger">{{ medalha.nome_medalha }}</span>#}
+                                                {#</div>#}
+                                            </div>
+                                        {% endfor %}
+                                        <hr/>
+                                    {% endif %}
+
                                 {% endfor %}
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        {#{{ dump(medalhas) }}#}
-                        {% if myValue1 in medalhas|keys %}
-                            aqui tem
-                        {% endif %}
-
-                        {#{% if myValue in ['apples', 'oranges'] %}#}
-                            {#Aqui, passou: {{ myValue }}#}
-                        {#{% endif %}#}
                     </div>
                 </div>
             </div>
