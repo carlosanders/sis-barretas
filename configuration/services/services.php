@@ -14,7 +14,8 @@ $container['view'] = function ($container) {
     $settings = $container->get('settings');
     $view = new \Slim\Views\Twig($settings['renderer']['template_path'], [
         'cache' => $settings['renderer']['template_cache'],
-        'auto_reload' => $settings['renderer']['auto_reload']
+        'auto_reload' => $settings['renderer']['auto_reload'],
+        'debug' => true,
     ]);
     $view->addExtension(new \Slim\Views\TwigExtension(
         $container->get('router'),
@@ -24,6 +25,8 @@ $container['view'] = function ($container) {
     $view->addExtension(new Knlv\Slim\Views\TwigMessages(
         $container->get('flash')
     ));
+
+    $view->addExtension(new Twig_Extension_Debug());
 
     $twig = $container->get('twig');
     foreach ($twig as $name => $value) {
@@ -54,6 +57,5 @@ $container['logger'] = function ($c) {
 // Service factory for the ORM
 $capsule = new Illuminate\Database\Capsule\Manager;
 $capsule->addConnection($container->get('settings')['db']);
-//$capsule->bootEloquent();
 $capsule->setAsGlobal();
 $capsule->bootEloquent();

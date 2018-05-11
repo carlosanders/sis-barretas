@@ -1,0 +1,100 @@
+{% extends "layout/layout.html.twig" %}
+
+{% block title %} Principal {% endblock %}
+
+{% block content %}
+    <!-- importamos o template desejado -->
+    <div class="container">
+        <!-- Content here -->
+        <h1>Monte sua placa de Barretas</h1>
+
+        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+                   aria-controls="pills-home" aria-selected="true">Barretas da Marinha</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+                   aria-controls="pills-profile" aria-selected="false">Barretas fora da Força</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-body">
+                                {% for categoria in categorias %}
+
+                                    {% if not categoria.medalhas is empty %}
+
+                                        {% set id_grupo = 0 %}
+                                        {#{% set valor_id_grupo = 0 %}#}
+                                        <h5 class="card-title">{{ categoria.nome }}</h5>
+                                        {% for medalha in categoria.medalhas %}
+                                            id_grupo= {{ id_grupo }}
+                                            obj->grupo_id= {{ medalha.grupo_id }}
+                                            nome_medalha= {{ medalha.nome_medalha }}
+                                            <div class="card-text">
+                                                {#{% if id_grupo == 0 %}#}
+                                                {% if id_grupo == 0 %}
+                                                    {% set id_grupo = medalha.grupo_id %}
+                                                    <span class="text-primary">{{ medalha.nome_grupo }}</span>
+                                                {% endif %}
+                                                {#{{ dump(medalha.grupo_id, valor_id_grupo) }}#}
+                                                {% if medalha.grupo_id != id_grupo %}
+                                                    {% set id_grupo = 0 %}
+                                                    <span class="text-success">Grupo: {{ medalha.nome_grupo }}</span>
+                                                {#{% else %}#}
+                                                {% endif %}
+
+                                                {#{% if medalha.grupo_id == valor_id_grupo %}#}
+                                                    {#{% set valor_id_grupo = valor_id_grupo %}#}
+                                                    {#<div class="col">#}
+                                                        {#({{ medalha.nome_medalha }})#}
+                                                    {#</div>#}
+                                                {#{% endif %}#}
+
+                                                {#<div class="col">#}
+                                                    {#<span class="text-danger">{{ medalha.nome_medalha }}</span>#}
+                                                {#</div>#}
+                                            </div>
+                                        {% endfor %}
+                                        <hr/>
+                                    {% endif %}
+
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                <div class="row">
+                    <div class="col">
+                        <div class="card">
+                            <h5 class="card-header">Featured</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">
+                                    With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <h5 class="card-header">Featured</h5>
+                            <div class="card-body">
+                                <h5 class="card-title">Special title treatment</h5>
+                                <p class="card-text">
+                                    With supporting text below as a natural lead-in to additional
+                                    content.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
